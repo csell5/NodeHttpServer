@@ -1,0 +1,28 @@
+{
+  "name": "spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "Clark Sell",
+  "license": "MIT",
+  "xervo": {
+    "projectName": "HttpServerSpike",
+    "url": "http://httpserverspike-96691.app.xervo.io"
+  },
+  "engines": {
+    "node": ">=6.5"
+  },
+  "dependencies": {
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "tap": "^10.3.0"
+  },
+  "scripts": {
+    "start": "node ./server.js --start",
+    "test": "tap test_*.js",
+    "xervo:push": "xervo deploy ./ -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
+    "xervo:start": "xervo project start -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
+    "xervo:stop": "xervo project stop -p $npm_package_xervo_projectName"
+  }
+}

@@ -13,6 +13,7 @@
     "node": ">=6.5"
   },
   "dependencies": {
+    "httpdispatcher": "^2.0.1",
     "winston": "^2.3.1"
   },
   "devDependencies": {

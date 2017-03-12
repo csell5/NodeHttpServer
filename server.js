@@ -1,15 +1,17 @@
 const HTTP = require('http')
+const HTTP_DISPATCHER = require('httpdispatcher')
 const WINSTON = require('winston')
 
+const dispatcher = new HTTP_DISPATCHER()
 const PORT = process.env.port || 8080
 
 const handleRequest = (request, response) => {
-  const resMessage = `It Works!! Path Hit: ${request.url}`
-  WINSTON.log('info', resMessage)
-  response.end(resMessage)
+  WINSTON.log('info', `Route requested: ${request.url}`) 
+  dispatcher.dispatch(request, response)
 }
 
 const server = HTTP.createServer(handleRequest)
+require('./routes').register(dispatcher)
 
 exports.listen = () => {
   server.listen(PORT, () => {

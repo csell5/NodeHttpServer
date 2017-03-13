@@ -1,6 +1,6 @@
 const T = require('tap')
 const HTTP = require('http')
-const Server = require('./server')
+const Server = require('../server')
 
 Server.listen()
 
@@ -10,8 +10,8 @@ const options = {
   method: 'GET'
 }
 
-const testResults = Promise.all([
-  
+Promise.all([
+
   T.test('get route for / and check for 200', (test) => {
     options.path = '/'
 
@@ -23,13 +23,13 @@ const testResults = Promise.all([
 
   T.test('Call invalid server path checking for 400', (test) => {
     options.path = '/invalid/path/for/dispatcher'
-    
+
     HTTP.request(options, (res) => {
       T.equal(res.statusCode, 404, 'http status code')
       test.end()
     }).end()
   }),
-  
+
   T.test('get route body for index and validate', (test) => {
     options.path = '/'
 
@@ -43,7 +43,6 @@ const testResults = Promise.all([
         test.match(body, `Index Page`, 'http path not found')
         test.end()
       })
-
     }).end()
   }),
 
@@ -57,44 +56,40 @@ const testResults = Promise.all([
       })
 
       res.on('end', () => {
-        const postData = JSON.parse(body);
+        const postData = JSON.parse(body)
         test.strictSame(postData.firstName, 'Tony', 'First Name is wrong')
         test.strictSame(postData.lastName, 'Stark', 'Last Name is wrong')
         test.end()
       })
-
     }).end()
   }),
 
   T.test('call api post route', (test) => {
     options.path = '/api/customer'
     options.method = 'POST'
-
     const postData = {
       a: 'a',
       b: 'b',
       c: 'c'
     }
-    
+
     options.data = postData
 
     HTTP.request(options, (res) => {
       let body = ''
+
       res.on('data', (chunk) => {
         T.equal(res.statusCode, 201, 'http status code')
         body += chunk
       })
 
       res.on('end', () => {
-        const postData = JSON.parse(body);
+        const postData = JSON.parse(body)
         test.strictSame(postData.status, 'success', 'POSTED')
         test.end()
       })
-
     }).end()
   })
-
-
-]).then( () => {
+]).then(() => {
   Server.close()
 })

@@ -6,12 +6,12 @@ const dispatcher = new HTTP_DISPATCHER()
 const PORT = process.env.port || 8080
 
 const handleRequest = (request, response) => {
-  WINSTON.log('info', `Route requested: ${request.url}`) 
+  WINSTON.log('info', `Route requested: ${request.url}`)
   dispatcher.dispatch(request, response)
 }
 
 const server = HTTP.createServer(handleRequest)
-require('./routes').register(dispatcher)
+require('./routes')(dispatcher)
 
 exports.listen = () => {
   server.listen(PORT, () => {
@@ -23,7 +23,7 @@ exports.close = (next) => {
   server.close(next)
 }
 
-const shouldStart = process.argv.find( (n) => n === '--start' )
-if ( shouldStart ) {
-  this.listen()
+const shouldStart = process.argv.find((n) => n === '--start')
+if (shouldStart) {
+  exports.listen()
 }

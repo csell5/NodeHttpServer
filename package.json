@@ -17,11 +17,13 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "standard": "^9.0.1",
     "tap": "^10.3.0"
   },
   "scripts": {
     "start": "node ./server.js --start",
-    "test": "tap test_*.js",
+    "pretest": "standard",
+    "test": "tap tests/**/*.js",
     "xervo:push": "xervo deploy ./ -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
     "xervo:start": "xervo project start -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
     "xervo:stop": "xervo project stop -p $npm_package_xervo_projectName"

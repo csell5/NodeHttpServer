@@ -24,8 +24,8 @@
     "start": "node ./server.js --start",
     "pretest": "standard",
     "test": "tap tests/**/*.js",
-    "xervo:push": "xervo deploy ./ -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
-    "xervo:start": "xervo project start -p $npm_package_xervo_projectName && open $npm_package_xervo_projectName.url",
+    "xervo:push": "xervo deploy ./ -p $npm_package_xervo_projectName && open $npm_package_xervo_url",
+    "xervo:start": "xervo project start -p $npm_package_xervo_projectName && open $npm_package_xervo_url",
     "xervo:stop": "xervo project stop -p $npm_package_xervo_projectName"
   }
 }

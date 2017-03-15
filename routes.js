@@ -1,7 +1,7 @@
-const WINSTON = require('winston')
+const Winston = require('winston')
 
 module.exports = (dispatcher) => {
-  WINSTON.log('info', 'routes registered')
+  Winston.info('routes registered')
 
   dispatcher.setStatic('/resources')
   dispatcher.setStaticDirname('static')
@@ -24,7 +24,7 @@ module.exports = (dispatcher) => {
   })
 
   dispatcher.onPost('/api/customer', (req, res) => {
-    WINSTON.log('info', req.body)
+    Winston.info(req.body)
 
     const response = {
       status: 'success'

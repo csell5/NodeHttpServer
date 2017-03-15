@@ -1,5 +1,5 @@
 const T = require('tap')
-const HTTP = require('http')
+const Http = require('http')
 const Server = require('../server')
 
 Server.listen()
@@ -15,7 +15,7 @@ Promise.all([
   T.test('get route for / and check for 200', (test) => {
     options.path = '/'
 
-    HTTP.request(options, (res) => {
+    Http.request(options, (res) => {
       T.equal(res.statusCode, 200, 'http status code')
       test.end()
     }).end()
@@ -24,7 +24,7 @@ Promise.all([
   T.test('Call invalid server path checking for 400', (test) => {
     options.path = '/invalid/path/for/dispatcher'
 
-    HTTP.request(options, (res) => {
+    Http.request(options, (res) => {
       T.equal(res.statusCode, 404, 'http status code')
       test.end()
     }).end()
@@ -33,7 +33,7 @@ Promise.all([
   T.test('get route body for index and validate', (test) => {
     options.path = '/'
 
-    HTTP.request(options, (res) => {
+    Http.request(options, (res) => {
       let body = ''
       res.on('data', (chunk) => {
         body += chunk
@@ -49,7 +49,7 @@ Promise.all([
   T.test('call api get route', (test) => {
     options.path = '/api/customer'
 
-    HTTP.request(options, (res) => {
+    Http.request(options, (res) => {
       let body = ''
       res.on('data', (chunk) => {
         body += chunk
@@ -75,7 +75,7 @@ Promise.all([
 
     options.data = postData
 
-    HTTP.request(options, (res) => {
+    Http.request(options, (res) => {
       let body = ''
 
       res.on('data', (chunk) => {

@@ -1,21 +1,21 @@
-const HTTP = require('http')
-const HTTP_DISPATCHER = require('httpdispatcher')
-const WINSTON = require('winston')
+const Http = require('http')
+const HttpDispatcher = require('httpdispatcher')
+const Winston = require('winston')
 
-const dispatcher = new HTTP_DISPATCHER()
-const PORT = process.env.port || 8080
+const dispatcher = new HttpDispatcher()
+const port = process.env.port || 8080
 
 const handleRequest = (request, response) => {
-  WINSTON.log('info', `Route requested: ${request.url}`)
+  Winston.info(`Route requested: ${request.url}`)
   dispatcher.dispatch(request, response)
 }
 
-const server = HTTP.createServer(handleRequest)
+const server = Http.createServer(handleRequest)
 require('./routes')(dispatcher)
 
 exports.listen = () => {
-  server.listen(PORT, () => {
-    WINSTON.log('info', `HTTP server listening on http://localhost:${PORT}`)
+  server.listen(port, () => {
+    Winston.info(`Http server listening on http://localhost:${port}`)
   })
 }
 
